@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\SuggestionController;
+use App\Http\controllers\API\v1\Auth\LoginController;
+use App\Http\controllers\API\v1\Auth\RegistrationController;
+use App\Http\controllers\API\v1\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,15 @@ use App\Http\Controllers\Api\SuggestionController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes 
+|--------------------------------------------------------------------------
+| 
+*/
+Route::post('/login', LoginController::class);
+Route::post('/register', RegistrationController::class);
+
+Route::apiResource('posts', PostController::class);
 
