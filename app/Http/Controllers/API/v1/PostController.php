@@ -17,6 +17,7 @@ class PostController extends BaseController
 
     public function __construct(IPostService $post)
     {
+        $this->middleware('auth:sanctum', ['except' => ['index','show']]);
         $this->post = $post;
     }
     /**

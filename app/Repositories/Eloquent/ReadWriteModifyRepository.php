@@ -46,9 +46,9 @@ class ReadWriteModifyRepository implements IReadOnlyRepository, IWriteModifyRepo
         return $this->model->create($attributes);
     }
 
-    public function updateById(array $attributes, int $id): bool
+    public function updateById(array $attributes, int $id): Model
     {
-        return $this->model->findOrFail($id)->update($attributes);
+        return tap($this->model->findOrFail($id))->update($attributes);
     }
 
     public function delete(int $id) : bool

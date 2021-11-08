@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\controllers\API\v1\Auth\LoginController;
 use App\Http\controllers\API\v1\Auth\RegistrationController;
 use App\Http\controllers\API\v1\PostController;
+use App\Http\controllers\API\v1\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,5 @@ Route::post('/login', LoginController::class);
 Route::post('/register', RegistrationController::class);
 
 Route::apiResource('posts', PostController::class);
+Route::apiresource('posts.comments', CommentController::class)->except(['show'])->shallow();
 
