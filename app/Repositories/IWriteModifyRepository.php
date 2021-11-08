@@ -17,7 +17,7 @@ interface IWriteModifyRepository
     * @param $id
     * @return Model
     */
-    public function updateById(array $attributes, int $id): bool;
+    public function updateById(array $attributes, int $id) : Model;
 
     /**
     * @return Bool
