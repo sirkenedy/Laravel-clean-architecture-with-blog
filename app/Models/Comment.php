@@ -24,4 +24,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function scopeCommentsWithPostId($query, $postId)
+    {
+        return $query->where('post_id', $postId);
+    }
 }

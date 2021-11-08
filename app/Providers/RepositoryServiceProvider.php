@@ -12,6 +12,9 @@ use App\Repositories\Eloquent\ReadOnlyRespository;
 use App\Repositories\Eloquent\Post\PostRepository;
 use App\Repositories\Eloquent\Post\PostRepositoryInterface;
 
+use App\Repositories\Eloquent\Comment\CommentRepository;
+use App\Repositories\Eloquent\Comment\CommentRepositoryInterface;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IReadOnlyRepository::class, ReadWriteModifyRepository::class);
         $this->app->bind(IWriteModifyRepository::class, ReadWriteModifyRepository::class);
         $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
+        $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
     }
 
     /**
