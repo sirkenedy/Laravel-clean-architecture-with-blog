@@ -10,9 +10,13 @@ use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\Post as PostResource;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use App\Traits\ImageTrait;
+use App\Http\Requests\Post\StorePostRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 
 class PostController extends BaseController
 {
+    use ImageTrait;
     private $post;
 
     public function __construct(IPostService $post)
@@ -37,7 +41,7 @@ class PostController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) : JsonResponse
+    public function store(StorePostRequest $request) : JsonResponse
     {
         return $this->handleResponse(new PostResource($this->post->createPost($request->validated())), "Post saved successfully", Response::HTTP_CREATED);
     }
@@ -60,9 +64,9 @@ class PostController extends BaseController
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $post) : JsonResponse
+    public function update(UpdatePostRequest $request, int $post) : JsonResponse
     {
-        return $this->handleResponse(new PostResource($this->post->updatePostById($request->all(), $post)), "Post updated successfully", Response::HTTP_OK);
+        return $this->handleResponse(new PostResource($this->post->updatePostById($request->validated(), $post)), "Post updated successfully", Response::HTTP_OK);
         
     }
 
