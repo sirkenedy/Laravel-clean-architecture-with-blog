@@ -3,8 +3,11 @@ namespace App\Services\Post;
 
 use App\Repositories\Eloquent\Post\PostRepositoryInterface;
 use App\Services\Post\IPostService;
+use App\Traits\ImageTrait;
 
-class PostService implements IPostService{
+class PostService implements IPostService
+{
+    use ImageTrait;
 
     protected $postRepository;
 
@@ -15,6 +18,7 @@ class PostService implements IPostService{
 
     public function createPost($data)
     {
+        $data = $this->imageUploadS3($data, 'post_image/');
         return $this->postRepository->create($data);
     }
 
@@ -25,6 +29,9 @@ class PostService implements IPostService{
 
     public function updatePostById(array $data, int $id)
     {
+        if (array_key_exists('image', $data)) {
+            $data = $this->imageUploadS3($data, 'post_image/');
+        }
         return $this->postRepository->updateById($data, $id);
     }
 
